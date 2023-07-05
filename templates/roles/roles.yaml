@@ -1,0 +1,15 @@
+{{- $top := . -}}
+{{- range $_, $item := .Values.roles }}
+{{- range $k, $v := . }}
+{{- range $vv := .}}                                                                                                                                              
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: "{{ $vv.prefix }}-{{ $vv.name -}}"
+  namespace: {{ $vv.namespace }}
+rules:
+{{ $top.Files.Get $vv.filename }}                                                                                                                     
+{{- end }} 
+{{- end }}   
+{{- end }}

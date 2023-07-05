@@ -1,0 +1,20 @@
+{{- range $_, $item := .Values.roles }}
+{{- range $k, $v := . }}
+{{- range $vv := .}}  
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: "{{ $vv.prefix }}-{{ $vv.name -}}-rolebinding"
+  namespace: {{ $vv.namespace }}
+subjects:
+- kind: Group
+  name: {{ $vv.group }}
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: "{{ $vv.prefix }}-{{ $vv.name -}}"
+  apiGroup: rbac.authorization.k8s.io
+{{- end }} 
+{{- end }}   
+{{- end }}

@@ -1,0 +1,14 @@
+{{- $top := . -}}
+{{- range $_, $item := .Values.clusterroles }}
+{{- range $k, $v := . }}
+{{- range $vv := .}} 
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: "{{ $vv.prefix }}-{{ $vv.name -}}"
+rules:
+{{ $top.Files.Get $vv.filename }}
+{{- end }}
+{{- end }}
+{{- end }}

@@ -1,0 +1,59 @@
+# Default values for auth-config.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: nginx
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+roles:
+  - retail:
+    - prefix: retail
+      name: readonly
+      namespace: non-retail
+      group: "CN=aws-platform-eng-dev-write,OU=EU,OU=Groups,OU=WILLIAMHILL,DC=Group,DC=WilliamHill,DC=PLC"
+      filename: rules/roles/read_roles.toml
+      
+    - prefix: retail
+      name: write
+      namespace: retail
+      group: "CN=aws-platform-eng-dev-write,OU=EU,OU=Groups,OU=WILLIAMHILL,DC=Group,DC=WilliamHill,DC=PLC"
+      filename: rules/roles/write_roles.toml
+
+  - trading:
+    - prefix: trading
+      name: readonly
+      namespace: non-trading
+      group: "CN=aws-platform-eng-dev-write,OU=EU,OU=Groups,OU=WILLIAMHILL,DC=Group,DC=WilliamHill,DC=PLC"
+      filename: rules/roles/read_roles.toml
+
+    - prefix: trading
+      create: true
+      name: write
+      namespace: trading
+      group: "CN=aws-platform-eng-dev-write,OU=EU,OU=Groups,OU=WILLIAMHILL,DC=Group,DC=WilliamHill,DC=PLC"
+      filename: rules/roles/write_roles.toml
+    
+    - prefix: test
+      create: true
+      name: write
+      namespace: test
+      group: "CN=aws-platform-eng-dev-write,OU=EU,OU=Groups,OU=WILLIAMHILL,DC=Group,DC=WilliamHill,DC=PLC"
+      filename: rules/roles/write_roles.toml
+
+clusterroles:
+  - app:
+    - prefix: clusterrole
+      name: jenkins
+      group: "CN=aws-platform-eng-dev-write,OU=EU,OU=Groups,OU=WILLIAMHILL,DC=Group,DC=WilliamHill,DC=PLC"
+      filename: rules/cluster_roles/cluster_read_all.toml
+
+
+

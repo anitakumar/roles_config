@@ -1,0 +1,57 @@
+- apiGroups:
+  - ""
+  - apps
+  - autoscaling
+  - batch
+  - extensions
+  - policy
+  - rbac.authorization.k8s.io
+  - storage.k8s.io
+  resources:
+  - componentstatuses
+  - customresourcedefinition
+  - configmaps
+  - cronjobs
+  - daemonsets
+  - deployments
+  - events
+  - endpoints
+  - horizontalpodautoscalers
+  - ingress
+  - ingresses
+  - jobs
+  - limitranges
+  - namespaces
+  - pods
+  - pods/log
+  - pods/exec
+  - persistentvolumes
+  - persistentvolumeclaims
+  - resourcequotas
+  - replicasets
+  - replicationcontrollers
+  - serviceaccounts
+  - services
+  - statefulsets
+  - storageclasses
+  - clusterroles
+  - roles
+  verbs:
+  - get
+  - watch
+  - list
+- nonResourceURLs:
+  - '*'
+  verbs:
+  - get
+  - watch
+  - list
+- apiGroups:
+  - ""
+  resources:
+  - pods/exec
+  verbs:
+  - get
+  - watch
+  - list
+  - create

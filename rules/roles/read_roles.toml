@@ -1,0 +1,6 @@
+- apiGroups: ["","extensions","apps"] # "" indicates the core API group
+  resources: ["pods","deployments"]
+  verbs: ["list","get","watch"]
+- apiGroups: [""] # "" indicates the core API group
+  resources: ["services"]
+  verbs: ["get", "watch", "list"]
